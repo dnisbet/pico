@@ -49,7 +49,23 @@ num = {' ':(1,1,1,1,1,1,1),
     '7':(0,0,0,1,1,1,1),
     '8':(0,0,0,0,0,0,0),
     '9':(0,0,0,0,1,0,0),
-    'b':(1,1,0,0,0,0,1)}
+    'A':(0,0,0,1,0,0,0),
+    'a':(0,0,0,0,0,1,0),
+    'b':(1,1,0,0,0,0,0),
+    'c':(1,1,1,0,0,1,0),
+    'd':(1,0,0,0,0,1,0),
+    'E':(0,1,1,0,0,0,0),
+    'f':(0,1,1,1,0,0,0),
+    'g':(0,1,0,0,0,0,1),
+    'h':(1,0,0,1,0,0,0),
+    'n':(1,1,0,1,0,1,0),
+    'r':(1,1,1,1,0,1,0),
+    'S':(0,1,0,0,1,0,0),
+    'y':(1,0,0,0,1,0,0),
+    'i':(1,1,1,1,0,0,1),
+    'o':(1,1,0,0,0,1,0),
+    'u':(1,1,0,0,0,1,1)
+       }
 
 def zero():
     a.off()
@@ -176,7 +192,7 @@ def count(t):
 #(year, month, mday, hour, minute, second, weekday, yearday)
 def countdown(start):
    i=start
-   while (start):  
+   while (i!=0):  
      s="% 4s" % str(i)
      space()
      for digit in range(0,4):
@@ -192,20 +208,73 @@ def countdown(start):
         else:
             i=i-1
 
+def countup(start):
+   i=1
+   j=start
+   jj="% 4s" % str(j)
+   while (i<start):  
+     s="% 4s" % str(i)
+     space()
+     for digit in range(0,4):
+        for loop in range(0,7):
+            #print (digits[digit],segments[loop],num[s[digit]][loop])
+            place=Pin(digits[digit], Pin.OUT, value=1)
+            show=Pin(segments[loop], Pin.OUT, value=num[s[digit]][loop])
+        
+        disp=Pin(digits[digit], Pin.OUT, value=1)
+        time.sleep(0.003)
+        disp=Pin(digits[digit], Pin.OUT, value=0)
+        if (i<start):
+            i=i+1
+        else:
+            i=i+start
+        #disp=Pin(digits[0], Pin.OUT, value=0)
+
+def seg():
+    for digit in range(0,4):
+        for loop in range(0,7):
+          place=Pin(digits[digit], Pin.OUT, value=0)
+          #print (digits[digit],num[display_string[digit]][loop])
+          show=Pin(segments[loop], Pin.OUT, value=num[display_string[digit]][loop]) 
+        disp=Pin(digits[digit], Pin.OUT, value=1)
+        time.sleep(0.003)
+        disp=Pin(digits[digit], Pin.OUT, value=0)
+          
 
 while True:
  #n=time.gmtime()
 
  #num=n[0]
  no=1
- countdown(2000)
+ 
+ #countup(200)
+ #time.sleep(1)
+ #countdown(100)
+ #time.sleep(1)
+ n = 200
+ 
+ for i in range(0,100):
+     display_string = 'hi  '
+     seg()
+     i+=1
 
+ for i in range(0,100):
+     display_string = 'cSA '
+     seg()
+     i+=1
+     
+ for i in range(0,100):
+     display_string = 'dAn '
+     seg()
+     i+=1
 
-
-
-
-
-        
+ #countdown(1050)
+ display_string = '    '
+ seg()
+ countdown(500)
+ seg()
+ countup(500)
+ seg()
      
         
 
