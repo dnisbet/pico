@@ -10,10 +10,13 @@ import ds1302
 I2C_ADDR     = 0x27
 I2C_NUM_ROWS = 2
 I2C_NUM_COLS = 16
-sda=machine.Pin(1)
-scl=machine.Pin(2)
-#ds = ds1302.DS1302(machine.Pin(5),machine.Pin(18),machine.Pin(19))
-
+sda=machine.Pin(0)
+scl=machine.Pin(1)
+clk_pin=18
+data_pin=17
+ce_pin=16
+ds = ds1302.DS1302(clk_pin,data_pin,ce_pin)
+#clk_pin=14, data_pin=12, ce_pin=13):
 
 def test_main():
     #Test function for verifying basic functionality
@@ -26,30 +29,27 @@ def test_main():
     utime.sleep(2)
     lcd.clear()
     count = 0
+    #write_datetime(self, year, month, day, hour, minute, second, weekday = 1 ):
     while True:
         time = utime.localtime()
-        #year=str(ds.Year())
-        #month=str(ds.Month())
-        #day=str(ds.Day())
-        #HH=str(ds.Hour())
-        #MM=str(ds.Minute())
-        #year=str(ds.read_datetime()[0])
-        #month=str(ds.read_datetime()[1])
-        #day=str(ds.read_datetime()[2])
-        #HH=str(ds.read_datetime()[3])
-        #MM=str(ds.read_datetime()[4])
-        #MM="% 2s" % MM
-        #HH="% 2s" % HH
-        #the_time=[year,month,day,HH,MM]
+        time = ds.read_datetime()
+        year=str(ds.read_datetime()[0])
+        month=str(ds.read_datetime()[1])
+        day=str(ds.read_datetime()[2])
+        width=2
+        HH='{:0>{w}}'.format(str(ds.read_datetime()[3]),w=width)
+        MM='{:0>{w}}'.format(str(ds.read_datetime()[4]),w=width)
+        SS='{:0>{w}}'.format(str(ds.read_datetime()[5]),w=width)
+
         
         lcd.clear()
         #print("{}/{}/{} {}:{}".format(year, month, day, HH, MM))
         #time = utime.localtime()
-        #lcd.putstr("{}/{}/{} {}:{}".format(year, month, day, HH, MM))
+        lcd.putstr("{}/{}/{} {}:{}".format(year, month, day, HH, MM))
         
-        lcd.putstr("{year}/{month}/{day} {HH}:{MM}:{SS}".format(
-            year=str(time[0]), month=str(time[1]), day=str(time[2]),
-            HH=str(time[3]), MM=str(time[4]), SS=str(time[5])))
+        #lcd.putstr("{year}/{month}/{day} {HH}:{MM}:{SS}".format(
+        #    year=str(time[0]), month=str(time[1]), day=str(time[2]),
+        #    HH=str(time[3]), MM=str(time[4]), SS=str(time[5])))
         #lcd.putstr(str(ds.read_datetime()))
         lcd.blink_cursor_on()
         lcd.move_to(0,1)
