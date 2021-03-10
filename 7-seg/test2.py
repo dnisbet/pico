@@ -8,20 +8,25 @@ t=0.2
 # |_|- e,d,c
 
 
-a=Pin(15, Pin.OUT)
-b=Pin(16, Pin.OUT)
-c=Pin(17, Pin.OUT)
-d=Pin(14, Pin.OUT)
-e=Pin(13, Pin.OUT)
-f=Pin(18, Pin.OUT)
-g=Pin(19, Pin.OUT)
 
-digits = (12,11,10,9)
-digits = (9,10,11,12)
+aP,bP,cP,dP,eP,fP,gP,decP=(15,14,13,12,11,10,9,8)
 
-#for i in range(0,4):
-# di=(Pin(digits[i], Pin.OUT))
-# di.on()
+
+a=Pin(aP, Pin.OUT)
+b=Pin(bP, Pin.OUT)
+c=Pin(cP, Pin.OUT)
+d=Pin(dP, Pin.OUT)
+e=Pin(eP, Pin.OUT)
+f=Pin(fP, Pin.OUT)
+g=Pin(gP, Pin.OUT)
+dec=Pin(decP, Pin.OUT,value=0)
+
+#digits = (12,11,10,9)
+#digits = (9,10,11,12)
+digits = (2,3,4,5)
+for i in range(0,4):
+ di=(Pin(digits[i], Pin.OUT,value=0))
+
 def dig1():
     di=Pin(digits[0], Pin.OUT,0)
 def dig2():
@@ -189,11 +194,5 @@ while True:
             no=1
         else:
             no=no+1
-
-
-        
-     
-        
-
-    
-         
+            
+            
