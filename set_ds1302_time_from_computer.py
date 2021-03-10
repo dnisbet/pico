@@ -25,15 +25,15 @@ pythonInject = [
     
     'led_onboard = machine.Pin(25, machine.Pin.OUT)',
     '(year,month,day,hour,minute,second,wday,yday,isdst)=utime.localtime('+utcTime+')',
-    #'machine.mem32[rtc_base_mem + 4] = (year << 12) | (month  << 8) | day',
-    #'machine.mem32[rtc_base_mem + 8] = ((hour << 16) | (minute << 8) | second) | (((wday + 1) % 7) << 24)',
-    #'machine.mem32[rtc_base_mem + atomic_bitmask_set + 0xc] = 0x10',
+    'machine.mem32[rtc_base_mem + 4] = (year << 12) | (month  << 8) | day',
+    'machine.mem32[rtc_base_mem + 8] = ((hour << 16) | (minute << 8) | second) | (((wday + 1) % 7) << 24)',
+    'machine.mem32[rtc_base_mem + atomic_bitmask_set + 0xc] = 0x10',
     'ds.write_datetime(year,month,day,hour,minute,second)', #year,month,day,hour,minute,seconds
     'for i in range(5):',
     '    led_onboard.toggle()',
     '    utime.sleep(0.03)',
     'led_onboard.value(0)',
-    'ds.read_datetime()'
+    '#ds.read_datetime()'
     ]
 
 if not picoPorts:
