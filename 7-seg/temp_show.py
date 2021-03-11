@@ -78,11 +78,11 @@ def seg(display_string,count=1):
         time.sleep(0.001)
         disp=Pin(digits[digit], Pin.OUT, value=0)
 
-def seg(display_string):
+def seg(display_string,kind):
     for digit in (0,2,3,1):
         for loop in range(0,7):
           place=Pin(digits[digit], Pin.OUT, value=0)
-          if digit == 1:
+          if digit == 1 and kind=='temp':
               decimal=Pin(segs[7],Pin.OUT,value=0)
           else: decimal=Pin(segs[7],Pin.OUT,value=1)
           #print (loop)
@@ -94,15 +94,27 @@ def seg(display_string):
         disp=Pin(digits[digit], Pin.OUT, value=0)
 
 
+
 t= '{:.0f}'.format(bme280.read_compensated_data()[0] / 10)
+
+
+p= '{:4d}'.format(int(bme280.read_compensated_data()[1] / 256 / 100))
+#p= int(bme280.read_compensated_data()[1] / 256 / 100)
 i=0
 while True:
     i=0
-    while i<50:
-        seg(t+'c')
+    t_end = time.time() + 10
+    
+    while time.time() < t_end:
+        t= '{:.0f}'.format(bme280.read_compensated_data()[0] / 10)
+        t_end_2 = time.time() + 1
+        while time.time() < t_end_2:
+            seg(t+'c','temp')
+
+    t_end = time.time() + 10
+    p= '{:4d}'.format(int(bme280.read_compensated_data()[1] / 256 / 100))
+    while time.time() < t_end:
+        seg(str(p),'pres')
         i+=1
-    t= '{:.0f}'.format(bme280.read_compensated_data()[0] / 10)
-
-
-
+    
   
