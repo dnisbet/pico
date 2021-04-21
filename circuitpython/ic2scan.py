@@ -11,7 +11,7 @@ import board
 import busio
 
 
-i2c = busio.I2C(board.GP1, board.GP0)# Create I2C bus as normal
+i2c = busio.I2C(board.GP17, board.GP16)# Create I2C bus as normal
  
 def bus_scan(bus, mux, otherdev):
     devices=[]

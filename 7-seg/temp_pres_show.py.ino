@@ -25,8 +25,6 @@ num = {' ':(1,1,1,1,1,1,1),
     '7':(0,0,0,1,1,1,1),
     '8':(0,0,0,0,0,0,0),
     '9':(0,0,0,0,1,0,0),
-    'a':(0,0,0,1,0,0,1),
-    'b':(1,1,0,0,0,0,0),
     'c':(1,1,1,0,0,1,0)}
 
 
@@ -106,7 +104,7 @@ i=0
 while True:
     i=0
     t_end = time.time() + 10
-    seg(t+'c','temp')
+    
     while time.time() < t_end:
         t= '{:.0f}'.format(bme280.read_compensated_data()[0] / 10)
         t_end_2 = time.time() + 1
@@ -119,3 +117,4 @@ while True:
         seg(str(p),'pres')
         i+=1
     
+

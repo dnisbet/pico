@@ -5,20 +5,17 @@
 import time
 import board
 import busio
-
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
-
-
 
 # Modify this if you have a different sized Character LCD
 lcd_columns = 16
 lcd_rows = 2
 
 # Initialise I2C bus.
-i2c = busio.I2C(scl=board.GP5, sda=board.GP4)
+i2c = busio.I2C(scl=board.GP17, sda=board.GP16)
 
 # Initialise the lcd class
-lcd = character_lcd.Character_LCD_I2C(i2c, lcd_columns, lcd_rows)
+lcd = character_lcd.Character_LCD_I2C(i2c, lcd_columns, lcd_rows,address=0x27)
 
 # Turn backlight on
 lcd.backlight = True

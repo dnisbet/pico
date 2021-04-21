@@ -68,30 +68,11 @@ def test_main():
     
     #lcd.home()
 
-    while True:
-       led.toggle()
-       c=0
-       while c<8:
-           lcd.clear()
-           show_time(c)
-           print(c)
-           c+=1
-           utime.sleep(1)
-       c=8
-       while c>0:
-           lcd.clear()
-           show_time(c)
-           #print(c)
-           c-=1
-           utime.sleep(1)
-       lcd.move_to(14,0)
-       lcd.putstr("Hi")
-       lcd.move_to(13,1)
-       lcd.putstr("Ro")
-       lcd.move_to(15,1)
-       lcd.putchar(chr(0))
-       utime.sleep(1)
+while True:
+    show_time(1)
+    utime.sleep(0.5)
 
 #if __name__ == "__main__":
-test_main()
+#test_main()
+
 

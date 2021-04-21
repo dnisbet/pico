@@ -7,8 +7,8 @@ from pico_i2c_lcd import I2cLcd
 I2C_ADDR     = 0x27
 I2C_NUM_ROWS = 2
 I2C_NUM_COLS = 16
-sda=Pin(8, Pin.OUT)
-scl=Pin(9, Pin.OUT)
+sda=Pin(17, Pin.OUT)
+scl=Pin(16, Pin.OUT)
 
 
 amber_led = Pin(15, Pin.OUT)
